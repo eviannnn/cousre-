@@ -1,7 +1,6 @@
 #include "Owner.h"
 #include "Car.h"
 
-
 int main()
 {
 	unsigned num_owners = 0;
@@ -12,25 +11,25 @@ int main()
 	const unsigned Max_Car = 100;
 	Owner owners[Max_Owner];
 	Car cars[Max_Car];
-	unsigned choice{ 0 };
+	unsigned choice{0};
 	while (true)
 	{
 		cout << "==================== Menu ===================\n";
-		cout << "1.  Create owner\n";				
+		cout << "1.  Create owner\n";
 		cout << "2.  Create car\n";
 		cout << "3.  Delete owner\n";
 		cout << "4.  Delete car\n";
 		cout << "5.  print owners\n";
-		cout << "6.  print departmets\n";
+		cout << "6.  print cars\n";
 		cout << "7.  Set car to owner\n";
 		cout << "8.  Remove car from owner\n";
 		cout << "9.  sort owners ascending\n";
 		cout << "10. sort owners descending\n";
-		cout << "11. sort cars ascending\n";						 
-		cout << "12. sort cars descending\n";					 
-		cout << "13. filter cars by name\n";	
+		cout << "11. sort cars ascending\n";
+		cout << "12. sort cars descending\n";
+		cout << "13. filter cars by name\n";
 		cout << "14. Write to file\n";
-		cout << "15. Read from a file\n"; 
+		cout << "15. Read from a file\n";
 		cout << "16. Exit\n";
 		cout << "============================================\n";
 		cout << "Enter your choice: ";
@@ -79,7 +78,7 @@ int main()
 		{
 			if (num_owners == 0 || num_car == 0)
 			{
-				cout << "Firstlty you should create a owner/car.\n";
+				cout << "Firstly you should create a owner/car.\n";
 				break;
 			}
 			unsigned _owner_id = owner.choose_Owner_id(owners, num_owners, Max_Owner);
@@ -96,7 +95,7 @@ int main()
 		{
 			if (num_owners == 0 || num_car == 0)
 			{
-				cout << "Firstlty you should create a owner/car.\n";
+				cout << "Firstly, you should create an owner/car.\n";
 				break;
 			}
 			unsigned _owner_id = owner.choose_Owner_id(owners, num_owners, Max_Owner);
@@ -105,8 +104,8 @@ int main()
 				continue;
 			}
 			car.remove_car_from_owner(cars, num_car, _owner_id);
-			unsigned dep_count = car.calculate_car_counts(cars, num_car, _owner_id);
-			owner.update_car_count(owners, num_owners, _owner_id, dep_count);
+			unsigned car_count = car.calculate_car_counts(cars, num_car, _owner_id);
+			owner.update_car_count(owners, num_owners, _owner_id, car_count);
 			break;
 		}
 		case 9:
@@ -141,43 +140,32 @@ int main()
 			}
 			car.sort_cars_descend(cars, num_car);
 			break;
-		{
-			owner.write_Owner_to_file(owners, num_owners);
+		case 13:
+			if (num_car == 0)
+			{
+				cout << "Firstly you should create car.\n";
+				break;
+			}
+			car.filter_cars_by_name(cars, num_car, "");
+			break;
+		case 14:
+			if (num_owners == 0 && num_car == 0)
+			{
+				cout << "Firstly you should create owner/car.\n";
+				break;
+			}
+			owner.write_owners_to_file(owners, num_owners);
 			car.write_Car_to_file(cars, num_car);
 			break;
-		}
-		case 13:
-		{
-			if (num_car < 2)
-			{
-				cout << "You should have at least 2 cars to filter\n";
-				break;
-			}
-			string _dep_name = "";
-			cout << "Enter Car name for filter: ";
-			cin >> _dep_name;
-			car.filter_cars_by_name(cars, num_car, _dep_name);
-			break;
-		}	
-		case 14:
-			{
-				owner.write_Owner_to_file(owners, num_owners);
-				car.write_Car_to_file(cars, num_car);
-				break;
-			}
 		case 15:
-		{
-			owner.read_Owner_to_file(owners, num_owners);
+			owner.read_owners_from_file(owners, num_owners);
 			car.read_Car_to_file(cars, num_car);
 			break;
-		}
 		case 16:
-			cout << "\nGoodbye\n";
 			return 0;
 		default:
-			cerr << "Error, no such an option available!\n";
-			return 1;
+			cout << "You have entered an invalid choice!\n";
+			break;
 		}
 	}
 }
-
