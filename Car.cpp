@@ -154,7 +154,7 @@ void Car::remove_car_from_owner(Car* cars, unsigned num_car, unsigned _owner_id)
 	}
 	else
 	{
-		unsigned dep_num = choose_Car(filtered_cars, num_car, Max_cars);
+		unsigned dep_num = choose_Car(filtered_cars,num_car, Max_cars);
 		if (dep_num != 0)
 		{
 			unsigned car_id_to_remove = filtered_cars[dep_num - 1].car_id;
@@ -187,7 +187,7 @@ void Car::filter_cars_by_name(Car* cars, unsigned num_car, string _car_name)
 	if (num_filt_car == 0)
 	{
 		cout << "\nNo such cars exist\n\n";
-	}
+		}
 	else
 	{
 		cout << "Filtered cars are: ";

@@ -31,8 +31,8 @@ public:
 	void sort_cars_descend(Car* cars, unsigned num_car);
 
 	//functiuons to calculate Car count for Owner
-	unsigned calculate_car_counts(Car* cars, unsigned num_car, unsigned _owner_id);
-
+	unsigned calculate_car_counts(Car* cars,unsigned num_car, unsigned _owner_id);
+	
 	//read and write to file
 	void write_Car_to_file(Car* cars, unsigned num_car);
 	void read_Car_to_file(Car* cars, unsigned& num_car);
